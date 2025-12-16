@@ -83,7 +83,7 @@ def build_read_input(device, input_num):
 
 def builst_read_output(device, output_num):
     # Outputs are 0x0001 - 0x0008
-    addr = output_num
+    addr = output_num + 1
     frame_wo_crc = bytes([
         device,      # slave
         READ_REG,      # read command
