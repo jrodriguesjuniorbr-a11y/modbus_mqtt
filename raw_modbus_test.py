@@ -18,6 +18,7 @@ import argparse
 import time
 import sys
 
+# Modbus function codes
 WRITE_REG = 0X06
 READ_REG  = 0X03
 

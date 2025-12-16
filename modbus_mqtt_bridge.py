@@ -25,7 +25,7 @@ import paho.mqtt.client as mqtt
 # -------------------
 
 
-
+# This callback is called when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, reason_code, properties):
     print("Connected:", reason_code)
     client.subscribe("george/test/board/cmd")
