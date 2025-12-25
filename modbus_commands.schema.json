@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Modbus MQTT Command Schema",
+  "type": "object",
+  "required": ["cmd"],
+  "properties": {
+    "cmd": {
+      "type": "string",
+      "enum": ["output", "output_all", "input", "status"]
+    },
+
+    "channel": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 8
+    },
+
+    "state": {
+      "type": "string",
+      "enum": ["on", "off"]
+    },
+
+    "target": {
+      "type": "string",
+      "enum": ["inputs", "outputs"]
+    }
+  },
+
+  "allOf": [
+    {
+      "if": {
+        "properties": { "cmd": { "const": "output" } }
+      },
+      "then": {
+        "required": ["channel", "state"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "cmd": { "const": "output_all" } }
+      },
+      "then": {
+        "required": ["state"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "cmd": { "const": "input" } }
+      },
+      "then": {
+        "required": ["channel"]
+      }
+    },
+    {
+      "if": {
+        "properties": { "cmd": { "const": "status" } }
+      },
+      "then": {
+        "required": ["target"]
+      }
+    }
+  ],
+
+  "additionalProperties": false
+}
